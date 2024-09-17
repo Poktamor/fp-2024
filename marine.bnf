@@ -1,0 +1,19 @@
+<operation> ::= <fill_ballasts> | <empty_ballasts| | <open_airlock> | <close_airlock>
+
+<fill_ballasts> ::= "fill_ballasts(" <digit> "," <ballast_count> "," <full_ballast_count> ")"
+
+<empty_ballasts> ::= "empty_ballasts(" <digit> "," <ballast_count> "," <full_ballast_count> ")"
+
+<manipulate_airlock> ::= "manipulate_airlock(" <open_state> ")"
+
+<ballast_count> ::= <digit>
+
+<full_ballast_count> ::= <digit>
+
+<airlock> ::= <open_state>
+
+<open_state> ::= "open" | "closed"
+
+<digit> ::= "1" | "2" | ... | "9"
+
+<char> ::= "a" | "b" | ... | "z" | "A" | "B" | ... | "Z" 
