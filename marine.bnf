@@ -1,10 +1,18 @@
-<operation> ::= <fill_ballasts> | <empty_ballasts| | <open_airlock> | <close_airlock>
+<operation> ::= <create_submarine> | <fill_ballasts> | <empty_ballasts| | <open_airlock> | <close_airlock>
 
-<fill_ballasts> ::= "fill_ballasts(" <digit> "," <ballast_count> "," <full_ballast_count> ")"
+<operation_list> ::= <operation> | <operation_list> ";" <operation>
 
-<empty_ballasts> ::= "empty_ballasts(" <digit> "," <ballast_count> "," <full_ballast_count> ")"
+<create_submarine> ::= "create_submarine("<submarine_type> "," <submarine_name> "," <ballast_count> ")"
 
-<manipulate_airlock> ::= "manipulate_airlock(" <open_state> ")"
+<fill_ballasts> ::= "fill_ballasts(" <number> "," <ballast_count> "," <full_ballast_count> ")"
+
+<empty_ballasts> ::= "empty_ballasts(" <number> "," <ballast_count> "," <full_ballast_count> ")"
+
+<manipulate_airlock> ::= "manipulate_airlock(" <open_state> ")" | "manipulate_airlock(" <fill_status> ")"
+
+<submarine_type> ::= "Attack" | "Scout" | "Deep_dive"
+
+<submarine_name> ::= <string>
 
 <ballast_count> ::= <digit>
 
@@ -14,6 +22,12 @@
 
 <open_state> ::= "open" | "closed"
 
-<digit> ::= "1" | "2" | ... | "9"
+<fill_status> ::= <digit> "liters" | <digit> "mililiters"
+
+<number> ::= <digit>| <number> <digit>
+
+<string> ::= <char> | <string> <char> 
+
+<digit> ::= "1" | "2" | ... | "9" 
 
 <char> ::= "a" | "b" | ... | "z" | "A" | "B" | ... | "Z" 
