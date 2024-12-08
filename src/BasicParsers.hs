@@ -83,6 +83,7 @@ parseTask =
   parseCreateSubmarine <|>
   parseDestroySubmarine <|>
   parseView <|>
+  parseManipulateAirlock <|>
   parseTheSea
 
 parseCreateSubmarine :: Parser Query
