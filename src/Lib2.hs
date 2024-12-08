@@ -22,8 +22,8 @@ import Data.Char
 import BasicParsers
 
 data State = State
-  { submarines :: [(SubmarineType, String, Int)], -- (VehicleType, Model, Year, Mileage)
-    theSea :: [(SubmarineType, Int)] -- Tracks vehicle inventory by VehicleType
+  { submarines :: [(SubmarineType, String, Int)],
+    theSea :: [(SubmarineType, Int)] 
   }
   deriving (Eq, Show)
 
