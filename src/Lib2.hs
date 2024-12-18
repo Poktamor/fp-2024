@@ -22,8 +22,8 @@ import Data.Char
 import BasicParsers
 
 data State = State
-  { submarines :: [(SubmarineType, String, Int)],
-    theSea :: [(SubmarineType, Int)] 
+  { submarines :: [(SubmarineType, String, Int)], -- (VehicleType, Model, Year, Mileage)
+    theSea :: [(SubmarineType, Int)] -- Tracks vehicle inventory by VehicleType
   }
   deriving (Eq, Show)
 
@@ -34,8 +34,8 @@ emptyState = State {submarines = [], theSea = []}
 parseQuery :: String -> Either String Query
 parseQuery s =
   case parse parseTaskList s of
-    Left e -> Left e
-    Right (qs, r) -> if null r
+    (Left e, _) -> Left e
+    (Right qs, r) -> if null r
       then case qs of
         [q] -> Right q
         _ -> Right (Sequence qs)
@@ -47,7 +47,7 @@ stateTransition st query = case query of
     let updatedSubmarines = (subType, subName, balCount) : submarines st
         updatedSea = addToSea subType 1 (theSea st)
         newState = st {submarines = updatedSubmarines, theSea = updatedSea}
-     in Right (Just ("Created " ++ show subType ++ " " ++ subName ++ ", "++ "Ballast count: " ++ show balCount ), newState)
+     in Right (Just ("Created " ++ show subType ++ " " ++ subName ++ ", Ballast count: " ++ show balCount ), newState)
   TheSea subType ->
     let submarineList = filter (\(t, _, _) -> t == subType) (submarines st)
         submarineStr = unlines $ map (\(_, n, b) -> n ++ ", Ballast count: " ++ show b) submarineList

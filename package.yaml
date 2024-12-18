@@ -22,6 +22,7 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
 - base >= 4.7 && < 5
 - directory
+- mtl
 
 ghc-options:
 - -Wall
@@ -37,14 +38,14 @@ ghc-options:
 library:
   source-dirs: src
   dependencies:
+  - free
   - random
   - stm
   - async
   - QuickCheck
   - transformers
-  - free
   - strict
-  
+
 executables:
   fp2024-one:
     main:                Main.hs
@@ -80,6 +81,35 @@ executables:
     - repline
     - mtl
     - stm
+  fp2024-four-client:
+    main:                Main.hs
+    source-dirs:         app4-client
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - fp2024
+    - repline
+    - lens
+    - wreq
+    - bytestring
+    - string-conversions
+    - free
+  fp2024-four-server:
+    main:                Main.hs
+    source-dirs:         app4-server
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - fp2024
+    - repline
+    - scotty
+    - string-conversions
+    - stm
+    - mtl
 
 tests:
   fp2024-test:
